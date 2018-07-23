@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The Auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of Auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -48,13 +48,13 @@
 #include "Style/Style.h"
 #include "WalletSplashScreen.h"
 
- 
+
 
 namespace WalletGui {
 
 namespace {
 
-const char BYTECOIN_URI_SCHEME_NAME[] = "alloy";
+const char BYTECOIN_URI_SCHEME_NAME[] = "auruxcoin";
 const QRegularExpression LOG_SPLASH_REG_EXP("\\[Core\\] Imported block with index");
 
 quint16 findPort() {
@@ -100,7 +100,7 @@ WalletApplication::WalletApplication(int& _argc, char** _argv) : QApplication(_a
   m_optimizationManager(nullptr), m_blogReader(new BlogReader(this)), m_mainWindow(nullptr), m_splash(nullptr),
   m_logWatcher(nullptr), m_isAboutToQuit(false) {
 
-  setApplicationName("alloywallet");
+  setApplicationName("auruxcoinwallet");
   setApplicationVersion(Settings::instance().getVersion());
   setQuitOnLastWindowClosed(false);
   setStyle(QStyleFactory::create("fusion"));
@@ -136,7 +136,7 @@ bool WalletApplication::init() {
   makeDataDir();
   WalletLogger::init(Settings::instance().getDataDir(), Settings::instance().hasDebugOption(), this);
   WalletLogger::info(tr("[Application] Initializing..."));
-  m_lockFile = new QLockFile(Settings::instance().getDataDir().absoluteFilePath("alloywallet.lock"));
+  m_lockFile = new QLockFile(Settings::instance().getDataDir().absoluteFilePath("auruxcoinwallet.lock"));
   QUrl paymentUrl = QUrl::fromUserInput(arguments().last());
   if (paymentUrl.scheme() != BYTECOIN_URI_SCHEME_NAME) {
     paymentUrl = QUrl();
@@ -148,9 +148,9 @@ bool WalletApplication::init() {
   }
 #endif
   if (!m_lockFile->tryLock()) {
-    WalletLogger::warning(tr("[Application] Alloy wallet already running"));
+    WalletLogger::warning(tr("[Application] auruxcoin wallet already running"));
     if (!paymentUrl.isValid()) {
-      QMessageBox::warning(nullptr, QObject::tr("Fail"), "Alloy wallet already running");
+      QMessageBox::warning(nullptr, QObject::tr("Fail"), "auruxcoin wallet already running");
     }
 
     return false;
@@ -259,9 +259,9 @@ bool WalletApplication::initCryptoNoteAdapter() {
       okButton->setText(QObject::tr("Ok"));
       dlg.addButton(okButton, QMessageBox::AcceptRole);
       dlg.setText(QObject::tr("The database is currently used by another application or service.\n"
-      "If you have alloyd with non-default RPC port, you should terminate it and relaunch AlloyWallet\n"
+      "If you have auruxcoind with non-default RPC port, you should terminate it and relaunch auruxcoinWallet\n"
       "or\n"
-      "Set the Local deamon required port in AlloyWallet Menu/Preferences/Connection settings."));
+      "Set the Local deamon required port in auruxcoinWallet Menu/Preferences/Connection settings."));
       dlg.exec();
       return false;
     }

@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -126,11 +126,11 @@ QString Style::glassColor() const {
 
 QIcon Style::getSystemTrayIcon() const {
 #ifdef Q_OS_MAC
-  return QIcon(":images/alloy_mac");
+  return QIcon(":images/auruxcoin_mac");
 #elif defined(Q_OS_LINUX)
-  return QIcon(":images/alloy_lin");
+  return QIcon(":images/auruxcoin_lin");
 #elif defined(Q_OS_WIN)
-  return QIcon(":images/alloy_win");
+  return QIcon(":images/auruxcoin_win");
 #endif
 }
 

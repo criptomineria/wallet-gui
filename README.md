@@ -1,14 +1,14 @@
-# Alloy GUI
+# auruxcoin GUI
 
-Copyright (c) 2017-2018, The Alloy Developers.   
+Copyright (c) 2017-2018, The Auruxcoin Developers.   
 Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
 
 # License
 
-Alloy's GUI Wallet is licensed under the "MIT License" for more info, refer to the [License](LICENSE) file.
+auruxcoin's GUI Wallet is licensed under the "MIT License" for more info, refer to the [License](LICENSE) file.
 
 # Download Releases
-https://github.com/alloyproject/alloy-gui/releases
+https://github.com/criptomineria/wallet-gui
 
 
 # How to build for Ubuntu Linux
@@ -20,11 +20,11 @@ https://github.com/alloyproject/alloy-gui/releases
 ```sudo apt-get install qt5-default qttools5-dev-tools```
 
 
-```git clone https://github.com/alloyproject/alloy-gui```
+```git clone https://github.com/criptomineria/wallet-gui```
 
-```cd alloy-gui```
+```cd auruxcoin-gui```
 
-```git submodule add -f https://github.com/alloyproject/alloy```
+```git submodule add -f https://github.com/criptomineria/auruxcoin```
 
 ```cp CMakeLists_ubuntu.txt CMakeLists.txt```
 
@@ -34,35 +34,35 @@ https://github.com/alloyproject/alloy-gui/releases
 
 ```make```
 
-```./AlloyWallet```
+```./auruxcoinWallet```
 
 
 
-# How to build for Mac OS 
+# How to build for Mac OS
 
 Install Homebrew from here: https://brew.sh/
 
 ```mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew```
 
-Open a Terminal and type: 
+Open a Terminal and type:
 
 ```brew install qt5```
 
 ```brew install cmake```
 
-Download a copy of the alloy-gui source:
+Download a copy of the auruxcoin-gui source:
 
 ```cd /opt```
 
-```git clone https://github.com/alloyproject/alloy-gui```
+```git clone https://github.com/criptomineria/wallet-gui```
 
-Enter the alloy-gui directory:
+Enter the auruxcoin-gui directory:
 
-```cd alloy-gui```
+```cd auruxcoin-gui```
 
-Download the latest alloycoin codebase:
+Download the latest auruxcoincoin codebase:
 
-```git submodule add -f https://github.com/alloyproject/alloy```
+```git submodule add -f https://github.com/criptomineria/auruxcoin```
 
 Use the correct CMake File
 
@@ -82,11 +82,11 @@ Run make to build the wallet:
 
 Fix the Links
 
-```/opt/homebrew/opt/qt/bin/macdeployqt AlloyWallet.app/```
+```/opt/homebrew/opt/qt/bin/macdeployqt auruxcoinWallet.app/```
 
 
-When the build has finished, to copy the Alloy GUi app into your Application folder type:
+When the build has finished, to copy the auruxcoin GUi app into your Application folder type:
 
-```cp -r AlloyWallet.app ~/Applications```
+```cp -r auruxcoinWallet.app ~/Applications```
 
-You can now run the Alloy GUI from Finder. Make sure that alloyd is running in a terminal window else the GUI will crash on startup.
+You can now run the auruxcoin GUI from Finder. Make sure that auruxcoind is running in a terminal window else the GUI will crash on startup.

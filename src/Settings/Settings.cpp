@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -57,7 +57,7 @@ const char OPTION_CLOSE_TO_TRAY[] = "closeToTray";
 const char OPTION_PRIVACY_PARAMS[] = "privacyParams";
 const char OPTION_PRIVACY_NEWS_ENABLED[] = "newsEnabled";
 
-const char DEFAULT_WALLET_FILE_NAME[] = "alloywallet.wallet";
+const char DEFAULT_WALLET_FILE_NAME[] = "auruxcoinwallet.wallet";
 const quint64 DEFAULT_OPTIMIZATION_PERIOD = 1000 * 60 * 5; // 5 minutes
 const quint64 DEFAULT_OPTIMIZATION_THRESHOLD = 1000000000000; //1XAO target
 const quint64 DEFAULT_OPTIMIZATION_MIXIN = 0;
@@ -75,16 +75,16 @@ Settings& Settings::instance() {
 
 
 Settings::Settings() : m_p2pBindPort(0), m_cmdLineParser(nullptr) {
-  m_defaultPoolList << "alloypool.com:3333";
+  m_defaultPoolList << "auruxcoinpool.com:3333";
 m_defaultPoolList << "pit-b.cryptoknight.cc:5661";
 m_defaultPoolList << "xao.mine2gether.com:1117";
-m_defaultPoolList << "sg.alloy.cryptonight.me:3333";
+m_defaultPoolList << "sg.auruxcoin.cryptonight.me:3333";
 m_defaultPoolList << "pool.almsoft.net:3333";
 m_defaultPoolList << "xao.euminingpool.com:4444";
 m_defaultPoolList << "server1.xao.newpool.pw:4444";
-m_defaultPoolList << "alloy.hashat.me:3333";
-m_defaultPoolList << "xao.corpopool.com:443";  
-m_defaultPoolList << "xao.almsoft.net:3333";  
+m_defaultPoolList << "auruxcoin.hashat.me:3333";
+m_defaultPoolList << "xao.corpopool.com:443";
+m_defaultPoolList << "xao.almsoft.net:3333";
 
 
   Style* lightStyle = new LightStyle();
@@ -110,30 +110,30 @@ void Settings::setCommandLineParser(CommandLineParser* _cmdLineParser) {
 }
 
 void Settings::init() {
-  QFile cfgFile(getDataDir().absoluteFilePath("alloywallet.cfg"));
-  
+  QFile cfgFile(getDataDir().absoluteFilePath("auruxcoinwallet.cfg"));
+
   if (cfgFile.open(QIODevice::ReadOnly)) {
     m_settings = QJsonDocument::fromJson(cfgFile.readAll()).object();
-    
+
     cfgFile.close();
   } else {
       //stuff in some good practice defaults
         QJsonObject optimizationObject;
    optimizationObject.insert(OPTION_WALLET_OPTIMIZATION_ENABLED, true);
    optimizationObject.insert(OPTION_WALLET_OPTIMIZATION_FUSION_TARNSACTIONS_IS_VISIBLE, true);
-    m_settings.insert(OPTION_NODE_REMOTE_RPC_URL, QString("rpc.alloyproject.org:1811"));
-    
+    m_settings.insert(OPTION_NODE_REMOTE_RPC_URL, QString("rpc.auruxcoinproject.org:1811"));
+
     m_settings.insert(OPTION_WALLET_OPTIMIZATION, optimizationObject);
-    
-      
+
+
   }
-  
+
 
   restoreDefaultPoolList();
-  
-  
-  
-    
+
+
+
+
 }
 
 void Settings::restoreDefaultPoolList() {
@@ -487,7 +487,7 @@ bool Settings::isStartOnLoginEnabled() const {
     return false;
   }
 
-  QString autorunFilePath = autorunDir.absoluteFilePath("alloywallet.plist");
+  QString autorunFilePath = autorunDir.absoluteFilePath("auruxcoinwallet.plist");
   if (!QFile::exists(autorunFilePath)) {
     return false;
   }
@@ -505,12 +505,12 @@ bool Settings::isStartOnLoginEnabled() const {
     return false;
   }
 
-  QString autorunFilePath = autorunDir.absoluteFilePath("alloywallet.desktop");
+  QString autorunFilePath = autorunDir.absoluteFilePath("auruxcoinwallet.desktop");
   res = QFile::exists(autorunFilePath);
 #elif defined(Q_OS_WIN)
   QSettings autorunSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-  res = autorunSettings.contains("AlloyWallet") &&
-    !QDir::fromNativeSeparators(autorunSettings.value("AlloyWallet").toString().split(' ')[0]).compare(QCoreApplication::applicationFilePath());
+  res = autorunSettings.contains("auruxcoinWallet") &&
+    !QDir::fromNativeSeparators(autorunSettings.value("auruxcoinWallet").toString().split(' ')[0]).compare(QCoreApplication::applicationFilePath());
 #endif
   return res;
 }
@@ -673,10 +673,10 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
       return;
     }
 
-    QString autorunFilePath = autorunDir.absoluteFilePath("alloywallet.plist");
+    QString autorunFilePath = autorunDir.absoluteFilePath("auruxcoinwallet.plist");
     QSettings autorunSettings(autorunFilePath, QSettings::NativeFormat);
     autorunSettings.remove("Program");
-    autorunSettings.setValue("Label", "org.alloy.alloy scientistwallet");
+    autorunSettings.setValue("Label", "org.auruxcoin.auruxcoin scientistwallet");
     autorunSettings.setValue("ProgramArguments", QVariantList() << QCoreApplication::applicationFilePath() << "--minimized");
     autorunSettings.setValue("RunAtLoad", _enable);
     autorunSettings.setValue("ProcessType", "InterActive");
@@ -695,7 +695,7 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
       return;
     }
 
-    QString autorunFilePath = autorunDir.absoluteFilePath("alloywallet.desktop");
+    QString autorunFilePath = autorunDir.absoluteFilePath("auruxcoinwallet.desktop");
     QFile autorunFile(autorunFilePath);
     if (!autorunFile.open(QFile::WriteOnly | QFile::Truncate)) {
       return;
@@ -704,7 +704,7 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
     if (_enable) {
       autorunFile.write("[Desktop Entry]\n");
       autorunFile.write("Type=Application\n");
-      autorunFile.write("Name=Alloy Wallet\n");
+      autorunFile.write("Name=auruxcoin Wallet\n");
       autorunFile.write(QString("Exec=%1 --minimized\n").arg(QCoreApplication::applicationFilePath()).toLocal8Bit());
       autorunFile.write("Terminal=false\n");
       autorunFile.write("Hidden=false\n");
@@ -716,9 +716,9 @@ void Settings::setStartOnLoginEnabled(bool _enable) {
     QSettings autorunSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
     if (_enable) {
       QString appPath = QString("%1 --minimized").arg(QDir::toNativeSeparators(QCoreApplication::applicationFilePath()));
-      autorunSettings.setValue("AlloyWallet", appPath);
+      autorunSettings.setValue("auruxcoinWallet", appPath);
     } else {
-      autorunSettings.remove("AlloyWallet");
+      autorunSettings.remove("auruxcoinWallet");
     }
 #endif
   }
@@ -953,19 +953,19 @@ void Settings::removeObserver(ISettingsObserver* _settingsObserver) {
 #ifdef Q_OS_WIN
 void Settings::setUrlHandler() {
   QWriteLocker lock(&m_lock);
-  QSettings protocolSettings("HKEY_CURRENT_USER\\Software\\Classes\\alloy", QSettings::NativeFormat);
-  protocolSettings.setValue(".", "URL:alloy");
+  QSettings protocolSettings("HKEY_CURRENT_USER\\Software\\Classes\\auruxcoin", QSettings::NativeFormat);
+  protocolSettings.setValue(".", "URL:auruxcoin");
   protocolSettings.setValue("URL Protocol", "");
-  QSettings iconSettings("HKEY_CURRENT_USER\\Software\\Classes\\alloy\\DefaultIcon", QSettings::NativeFormat);
+  QSettings iconSettings("HKEY_CURRENT_USER\\Software\\Classes\\auruxcoin\\DefaultIcon", QSettings::NativeFormat);
   iconSettings.setValue(".", QDir::toNativeSeparators(QCoreApplication::applicationFilePath()));
-  QSettings openSettings("HKEY_CURRENT_USER\\Software\\Classes\\alloy\\shell\\open\\command", QSettings::NativeFormat);
+  QSettings openSettings("HKEY_CURRENT_USER\\Software\\Classes\\auruxcoin\\shell\\open\\command", QSettings::NativeFormat);
   QString commandString("\"%1\" \"%2\"");
   openSettings.setValue(".", commandString.arg(QDir::toNativeSeparators(QCoreApplication::applicationFilePath())).arg("%1"));
 }
 #endif
 
 void Settings::saveSettings() const {
-  QFile cfgFile(QDir(m_cmdLineParser->getDataDir()).absoluteFilePath("alloywallet.cfg"));
+  QFile cfgFile(QDir(m_cmdLineParser->getDataDir()).absoluteFilePath("auruxcoinwallet.cfg"));
   if (cfgFile.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
     QJsonDocument cfg_doc(m_settings);
     cfgFile.write(cfg_doc.toJson());

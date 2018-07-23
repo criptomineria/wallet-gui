@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 3.0.2)
 
 
 include(CryptoNoteWallet.cmake)
- 
 
 
-if(WIN32) 
+
+if(WIN32)
 #"C:\Program Files\CMake\bin\cmake.exe" -G  "Visual Studio 14 2015 Win64" ..
-#msbuild Alloy.sln /p:Configuration=Release
+#msbuild auruxcoin.sln /p:Configuration=Release
 
 set(BOOST_LIBRARYDIR c:/boost_1_63_0/lib64-msvc-14.0)
 set(BOOST_INCLUDEDIR c:/boost_1_63_0/boost)
@@ -17,10 +17,10 @@ set(BOOST_ROOT c:/boost_1_63_0)
 
 
 set(CMAKE_PREFIX_PATH C:/Qt/Qt5.10.0/5.10.0/msvc2015_64)
- 
-set(PROJECT_SOURCE_DIR c:/opt/alloy-gui)
+
+set(PROJECT_SOURCE_DIR c:/opt/auruxcoin-gui)
 endif()
- 
+
 
 
 
@@ -51,10 +51,10 @@ find_package(Qt5 REQUIRED COMPONENTS
 #    -DBoost_USE_STATIC_LIBS:BOOL=ON
 #    -DBoost_USE_STATIC_RUNTIME:BOOL=OFF)
 #include(ExternalProject)
-#ExternalProject_Add(Alloy
-#    SOURCE_DIR ${CMAKE_SOURCE_DIR}/alloy
-#    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/Alloy
-#    CMAKE_ARGS 
+#ExternalProject_Add(auruxcoin
+#    SOURCE_DIR ${CMAKE_SOURCE_DIR}/auruxcoin
+#    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/auruxcoin
+#    CMAKE_ARGS
 #        -DSTATIC:BOOL=OFF
 #        -DBoost_USE_STATIC_LIBS:BOOL=ON
 #        -DBoost_USE_STATIC_RUNTIME:BOOL=OFF
@@ -215,8 +215,8 @@ set(SOURCES
     src/Style/Style.cpp
     src/WalletLogger/WalletLogger.cpp)
 
-    
-    
+
+
     #file(GLOB_RECURSE SOURCES src/*.cpp)
 #file(GLOB_RECURSE HEADERS "${PROJECT_SOURCE_DIR}src/*.h)
 
@@ -227,22 +227,22 @@ qt5_wrap_ui(UIS ${FORMS})
 qt5_add_resources(RCC ${QRC})
 
 
-set(BUILD_RESOURCES "${PROJECT_SOURCE_DIR}/src/alloywallet.rc")
+set(BUILD_RESOURCES "${PROJECT_SOURCE_DIR}/src/auruxcoinwallet.rc")
 
 
 
-    
+
 if(WIN32)
     set(SOURCES ${SOURCES} Platform/Windows/ApplicationEventHandler.cpp)
-    
+
         add_definitions(/D_CRT_SECURE_NO_WARNINGS /D_WIN32_WINNT=0x0600)
         include_directories(
-            alloy/src/Platform/msc
-            alloy/src/Platform/Windows
+            auruxcoin/src/Platform/msc
+            auruxcoin/src/Platform/Windows
             Platform/Windows)
         set(BUILD_PLATFORM WIN32)
         set(Qt5_MAIN Qt5::WinMain)
-    
+
 endif()
 
 
@@ -252,8 +252,8 @@ endif()
 # Link our externalproject *.lib's
 link_directories(
     ${Boost_LIBRARY_DIRS}
-    /opt/alloy/libs)
-# Build AlloyWallet.exe
+    /opt/auruxcoin/libs)
+# Build auruxcoinWallet.exe
 #add_executable(${PROJECT_NAME} ${BUILD_PLATFORM} ${SOURCES})
 add_executable(${PROJECT_NAME} ${BUILD_PLATFORM} ${BUILD_RESOURCES} ${SOURCES} ${HEADERS} ${UIS} ${RCC})
 
@@ -262,9 +262,9 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC -DGIT_REVISION="${GIT_REVISION
 target_include_directories(${PROJECT_NAME} PUBLIC
     include
     src
-    alloy/include
-    alloy/src
-    alloy/external/rocksdb/include
+    auruxcoin/include
+    auruxcoin/src
+    auruxcoin/external/rocksdb/include
     ${Boost_INCLUDE_DIR})
 target_link_libraries(${PROJECT_NAME}
     ${Qt5_MAIN}
@@ -288,9 +288,4 @@ target_link_libraries(${PROJECT_NAME}
     Qt5::Widgets
     Qt5::Gui
     Qt5::Network
-    Imm32 Iphlpapi Rpcrt4 Winmm Wtsapi32) 
-
-
-    
-        
-  
+    Imm32 Iphlpapi Rpcrt4 Winmm Wtsapi32)

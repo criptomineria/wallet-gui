@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -326,8 +326,8 @@ void OverviewHeaderFrame::transactionPoolChanged() {
 
 void OverviewHeaderFrame::walletStateModelDataChanged(const QModelIndex& _topLeft, const QModelIndex& _bottomRight,
   const QVector<int>& _roles) {
-      
-   /*   
+
+   /*
   if (_topLeft.column() == WalletStateModel::COLUMN_ABOUT_TO_BE_SYNCHRONIZED) {
     bool walletAboutToBeSynchronized = _topLeft.data().toBool();
     if (!walletAboutToBeSynchronized) {

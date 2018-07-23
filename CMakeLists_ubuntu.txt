@@ -12,10 +12,10 @@ set(CRYPTONOTE_LIB cryptonote)
 include_directories(${CMAKE_BINARY_DIR}
   src
   include
-  alloy/external
-  alloy/external/rocksdb/include/
-  alloy/include
-  alloy/src
+  auruxcoin/external
+  auruxcoin/external/rocksdb/include/
+  auruxcoin/include
+  auruxcoin/src
 )
 
 find_package(Qt5Gui REQUIRED)
@@ -23,7 +23,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5DBus REQUIRED)
 
-include_directories(${Qt5DBus_INCLUDE_DIRS} alloy/external/rocksdb/include/ include src external "${CMAKE_CURRENT_BINARY_DIR}/version")
+include_directories(${Qt5DBus_INCLUDE_DIRS} auruxcoin/external/rocksdb/include/ include src external "${CMAKE_CURRENT_BINARY_DIR}/version")
 
 if(STATIC)
   set(Boost_USE_STATIC_LIBS ON)
@@ -40,7 +40,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 set(VERSION "")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/miniupnpcstrings.h.in "miniupnpcstrings.h")
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/alloy/src/version.h.in "version.h")
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/auruxcoin/src/version.h.in "version.h")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/CryptoNoteWalletConfig.h.in "CryptoNoteWalletConfig.h")
 
 add_definitions(-DGIT_REVISION="${GIT_REVISION}")
@@ -49,90 +49,90 @@ set(CMAKE_AUTOMOC ON)
 set_property(SOURCE qrc_resources.cpp PROPERTY SKIP_AUTOMOC ON)
 
 file(GLOB_RECURSE CRYPTONOTE_SOURCES
-  alloy/external/miniupnpc/connecthostport.c
-  alloy/external/miniupnpc/igd_desc_parse.c
-  alloy/external/miniupnpc/minisoap.c
-  alloy/external/miniupnpc/miniupnpc.c
-  alloy/external/miniupnpc/miniwget.c
-  alloy/external/miniupnpc/minixml.c
-  alloy/external/miniupnpc/portlistingparse.c
-  alloy/external/miniupnpc/receivedata.c
-  alloy/external/miniupnpc/upnpcommands.c
-  alloy/external/miniupnpc/upnpreplyparse.c
-  alloy/src/BlockchainExplorer/BlockchainExplorer.cpp
-  alloy/src/BlockchainExplorer/BlockchainExplorerErrors.cpp
-  alloy/src/Common/Base58.cpp
-  alloy/src/Common/CommandLine.cpp
-  alloy/src/Common/Util.cpp
-  alloy/src/Common/StringTools.cpp
-  alloy/src/Common/JsonValue.cpp
-  alloy/src/Common/ConsoleTools.cpp
-  alloy/src/Common/MemoryInputStream.cpp
-  alloy/src/Common/PathTools.cpp
-  alloy/src/Common/StdInputStream.cpp
-  alloy/src/Common/StdOutputStream.cpp
-  alloy/src/Common/StreamTools.cpp
-  alloy/src/Common/StringOutputStream.cpp
-  alloy/src/Common/StringView.cpp
-  alloy/src/Common/VectorOutputStream.cpp
-  alloy/src/Common/ScopeExit.cpp
-  alloy/src/ConnectivityTool/ConnectivityTool.cpp
-  alloy/src/crypto/blake256.c
-  alloy/src/crypto/chacha8.c
-  alloy/src/crypto/crypto-ops-data.c
-  alloy/src/crypto/crypto-ops.c
-  alloy/src/crypto/crypto.cpp
-  alloy/src/crypto/groestl.c
-  alloy/src/crypto/hash-extra-blake.c
-  alloy/src/crypto/hash-extra-groestl.c
-  alloy/src/crypto/hash-extra-jh.c
-  alloy/src/crypto/hash-extra-skein.c
-  alloy/src/crypto/hash.c
-  alloy/src/crypto/jh.c
-  alloy/src/crypto/keccak.c
-  alloy/src/crypto/oaes_lib.c
-  alloy/src/crypto/random.c
-  alloy/src/crypto/skein.c
-  alloy/src/crypto/slow-hash.c
-  alloy/src/crypto/slow-hash.cpp
-  alloy/src/crypto/tree-hash.c
-  alloy/src/CryptoNoteCore/*.cpp
-  alloy/src/CryptoNoteProtocol/*.cpp
-  alloy/src/Daemon/*.cpp
-  alloy/src/HTTP/*.cpp
-  alloy/src/InProcessNode/InProcessNode.cpp
-  alloy/src/InProcessNode/InProcessNodeErrors.cpp
-  alloy/src/Logging/*.cpp
-  alloy/src/NodeRpcProxy/NodeErrors.cpp
-  alloy/src/NodeRpcProxy/NodeRpcProxy.cpp
-  alloy/src/P2p/*.cpp
-  alloy/src/Rpc/*.cpp
-  alloy/src/Serialization/*.cpp
-  alloy/src/Transfers/BlockchainSynchronizer.cpp
-  alloy/src/Transfers/SynchronizationState.cpp
-  alloy/src/Transfers/TransfersConsumer.cpp
-  alloy/src/Transfers/TransfersContainer.cpp
-  alloy/src/Transfers/TransfersSubscription.cpp
-  alloy/src/Transfers/TransfersSynchronizer.cpp
-  alloy/src/Wallet/*.cpp
-  alloy/src/WalletLegacy/KeysStorage.cpp
-  alloy/src/WalletLegacy/WalletLegacy.cpp
-  alloy/src/WalletLegacy/WalletHelper.cpp
-  alloy/src/WalletLegacy/WalletLegacySerializer.cpp
-  alloy/src/WalletLegacy/WalletLegacySerialization.cpp
-  alloy/src/WalletLegacy/WalletTransactionSender.cpp
-  alloy/src/WalletLegacy/WalletUnconfirmedTransactions.cpp
-  alloy/src/WalletLegacy/WalletUserTransactionsCache.cpp
-  alloy/src/System/ContextGroup.cpp
-  alloy/src/System/Event.cpp
-  alloy/src/System/EventLock.cpp
-  alloy/src/System/InterruptedException.cpp
-  alloy/src/System/Ipv4Address.cpp
-  alloy/src/System/TcpStream.cpp
-  alloy/src/JsonRpcServer/*.cpp
-  alloy/src/PaymentGate/*.cpp
-  alloy/src/PaymentGateService/*.cpp
-  alloy/src/Miner/*.cpp
+  auruxcoin/external/miniupnpc/connecthostport.c
+  auruxcoin/external/miniupnpc/igd_desc_parse.c
+  auruxcoin/external/miniupnpc/minisoap.c
+  auruxcoin/external/miniupnpc/miniupnpc.c
+  auruxcoin/external/miniupnpc/miniwget.c
+  auruxcoin/external/miniupnpc/minixml.c
+  auruxcoin/external/miniupnpc/portlistingparse.c
+  auruxcoin/external/miniupnpc/receivedata.c
+  auruxcoin/external/miniupnpc/upnpcommands.c
+  auruxcoin/external/miniupnpc/upnpreplyparse.c
+  auruxcoin/src/BlockchainExplorer/BlockchainExplorer.cpp
+  auruxcoin/src/BlockchainExplorer/BlockchainExplorerErrors.cpp
+  auruxcoin/src/Common/Base58.cpp
+  auruxcoin/src/Common/CommandLine.cpp
+  auruxcoin/src/Common/Util.cpp
+  auruxcoin/src/Common/StringTools.cpp
+  auruxcoin/src/Common/JsonValue.cpp
+  auruxcoin/src/Common/ConsoleTools.cpp
+  auruxcoin/src/Common/MemoryInputStream.cpp
+  auruxcoin/src/Common/PathTools.cpp
+  auruxcoin/src/Common/StdInputStream.cpp
+  auruxcoin/src/Common/StdOutputStream.cpp
+  auruxcoin/src/Common/StreamTools.cpp
+  auruxcoin/src/Common/StringOutputStream.cpp
+  auruxcoin/src/Common/StringView.cpp
+  auruxcoin/src/Common/VectorOutputStream.cpp
+  auruxcoin/src/Common/ScopeExit.cpp
+  auruxcoin/src/ConnectivityTool/ConnectivityTool.cpp
+  auruxcoin/src/crypto/blake256.c
+  auruxcoin/src/crypto/chacha8.c
+  auruxcoin/src/crypto/crypto-ops-data.c
+  auruxcoin/src/crypto/crypto-ops.c
+  auruxcoin/src/crypto/crypto.cpp
+  auruxcoin/src/crypto/groestl.c
+  auruxcoin/src/crypto/hash-extra-blake.c
+  auruxcoin/src/crypto/hash-extra-groestl.c
+  auruxcoin/src/crypto/hash-extra-jh.c
+  auruxcoin/src/crypto/hash-extra-skein.c
+  auruxcoin/src/crypto/hash.c
+  auruxcoin/src/crypto/jh.c
+  auruxcoin/src/crypto/keccak.c
+  auruxcoin/src/crypto/oaes_lib.c
+  auruxcoin/src/crypto/random.c
+  auruxcoin/src/crypto/skein.c
+  auruxcoin/src/crypto/slow-hash.c
+  auruxcoin/src/crypto/slow-hash.cpp
+  auruxcoin/src/crypto/tree-hash.c
+  auruxcoin/src/CryptoNoteCore/*.cpp
+  auruxcoin/src/CryptoNoteProtocol/*.cpp
+  auruxcoin/src/Daemon/*.cpp
+  auruxcoin/src/HTTP/*.cpp
+  auruxcoin/src/InProcessNode/InProcessNode.cpp
+  auruxcoin/src/InProcessNode/InProcessNodeErrors.cpp
+  auruxcoin/src/Logging/*.cpp
+  auruxcoin/src/NodeRpcProxy/NodeErrors.cpp
+  auruxcoin/src/NodeRpcProxy/NodeRpcProxy.cpp
+  auruxcoin/src/P2p/*.cpp
+  auruxcoin/src/Rpc/*.cpp
+  auruxcoin/src/Serialization/*.cpp
+  auruxcoin/src/Transfers/BlockchainSynchronizer.cpp
+  auruxcoin/src/Transfers/SynchronizationState.cpp
+  auruxcoin/src/Transfers/TransfersConsumer.cpp
+  auruxcoin/src/Transfers/TransfersContainer.cpp
+  auruxcoin/src/Transfers/TransfersSubscription.cpp
+  auruxcoin/src/Transfers/TransfersSynchronizer.cpp
+  auruxcoin/src/Wallet/*.cpp
+  auruxcoin/src/WalletLegacy/KeysStorage.cpp
+  auruxcoin/src/WalletLegacy/WalletLegacy.cpp
+  auruxcoin/src/WalletLegacy/WalletHelper.cpp
+  auruxcoin/src/WalletLegacy/WalletLegacySerializer.cpp
+  auruxcoin/src/WalletLegacy/WalletLegacySerialization.cpp
+  auruxcoin/src/WalletLegacy/WalletTransactionSender.cpp
+  auruxcoin/src/WalletLegacy/WalletUnconfirmedTransactions.cpp
+  auruxcoin/src/WalletLegacy/WalletUserTransactionsCache.cpp
+  auruxcoin/src/System/ContextGroup.cpp
+  auruxcoin/src/System/Event.cpp
+  auruxcoin/src/System/EventLock.cpp
+  auruxcoin/src/System/InterruptedException.cpp
+  auruxcoin/src/System/Ipv4Address.cpp
+  auruxcoin/src/System/TcpStream.cpp
+  auruxcoin/src/JsonRpcServer/*.cpp
+  auruxcoin/src/PaymentGate/*.cpp
+  auruxcoin/src/PaymentGateService/*.cpp
+  auruxcoin/src/Miner/*.cpp
 )
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
@@ -175,12 +175,12 @@ if (WIN32)
   endif()
 
   add_definitions(/D_CRT_SECURE_NO_WARNINGS /D_WIN32_WINNT=0x0600 /DSTATICLIB)
-  include_directories(alloy/src/Platform/msc)
-  link_directories(alloy/external/rocksdb)
+  include_directories(auruxcoin/src/Platform/msc)
+  link_directories(auruxcoin/external/rocksdb)
 
   set(PLATFORM_DIR Windows)
   set(BUILD_PLATFORM WIN32)
-  set(BUILD_RESOURCES src/alloywallet.rc)
+  set(BUILD_RESOURCES src/auruxcoinwallet.rc)
   set(QTMAIN Qt5::WinMain)
 
 elseif (UNIX)
@@ -188,13 +188,13 @@ elseif (UNIX)
   add_custom_target(
      rocksdb
      COMMAND make static_lib -Wno-undef -Wno-unused-result -Wno-unused-value
-     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/alloy/external/rocksdb
+     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/auruxcoin/external/rocksdb
   )
   add_library(rocksdblib STATIC IMPORTED GLOBAL)
-  set_target_properties(rocksdblib PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/alloy/external/rocksdb/librocksdb.a)
+  set_target_properties(rocksdblib PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/auruxcoin/external/rocksdb/librocksdb.a)
   add_dependencies(rocksdblib rocksdb)
 
-  set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} alloy/external/miniupnpc/minissdpc.c)
+  set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} auruxcoin/external/miniupnpc/minissdpc.c)
 
   if (APPLE)
     enable_language(ASM)
@@ -203,7 +203,7 @@ elseif (UNIX)
     set(PLATFORM_DIR OSX)
     set(MACOSX_BUNDLE_INFO_STRING "Cryptonote GUI wallet")
     set(MACOSX_BUNDLE_LONG_VERSION_STRING "${VERSION_VERSION}.${VERSION_MINOR}.${VERSION_PATCH}")
-    set(MACOSX_BUNDLE_BUNDLE_NAME AlloyWallet)
+    set(MACOSX_BUNDLE_BUNDLE_NAME auruxcoinWallet)
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION_VERSION}.${VERSION_MINOR}.${VERSION_PATCH}")
     set(MACOSX_BUNDLE_BUNDLE_VERSION "$${VERSION_VERSION}.${VERSION_MINOR}.${VERSION_PATCH}")
 
@@ -215,8 +215,8 @@ elseif (UNIX)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -maes -D_DARWIN_C_SOURCE")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa -framework OpenGL -framework CoreFoundation -framework Carbon -framework IOKit -L/usr/lib")
 
-    set(MACOSX_BUNDLE_ICON_FILE alloy.icns)
-    set(APPLICATION_ICON src/images/alloy.icns)
+    set(MACOSX_BUNDLE_ICON_FILE auruxcoin.icns)
+    set(APPLICATION_ICON src/images/auruxcoin.icns)
     set_source_files_properties(${APPLICATION_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
     set(BUILD_PLATFORM MACOSX_BUNDLE)
@@ -233,8 +233,8 @@ elseif (UNIX)
   endif (APPLE)
 endif ()
 
-include_directories(alloy/src/Platform/${PLATFORM_DIR})
-file(GLOB PLATFORM_SOURCES alloy/src/Platform/${PLATFORM_DIR}/System/*)
+include_directories(auruxcoin/src/Platform/${PLATFORM_DIR})
+file(GLOB PLATFORM_SOURCES auruxcoin/src/Platform/${PLATFORM_DIR}/System/*)
 set(CRYPTONOTE_SOURCES ${CRYPTONOTE_SOURCES} ${PLATFORM_SOURCES} ${CRYPTONOTE_PLATFORM})
 
 add_library(${CRYPTONOTE_LIB} STATIC ${CRYPTONOTE_SOURCES})
@@ -255,4 +255,3 @@ elseif (WIN32)
 endif (APPLE)
 
 qt5_use_modules(${PROJECT_NAME} Widgets Gui Network)
-

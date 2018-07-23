@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -97,7 +97,7 @@ void SendGlassFrame::drawProgressLabel(QPainter &_painter) {
   QFont font;
   font.setBold(true);
   font.setPixelSize(14);
-  QString msg = tr("You will be able to send Alloy\nwhen the wallet is synchronized");
+  QString msg = tr("You will be able to send auruxcoin\nwhen the wallet is synchronized");
   QFontMetrics fm(font);
   QRect messageRect = fm.boundingRect(QRect(), Qt::AlignCenter, msg);
   messageRect.moveCenter(QPoint(m_pixmapBuffer.width() / 2, 163));

@@ -1,3 +1,3 @@
-[submodule "alloy"]
-	path = alloy
-	url = https://github.com/alloy-project/alloy
+[submodule "auruxcoin"]
+	path = auruxcoin
+	url = https://github.com/auruxcoin-project/auruxcoin

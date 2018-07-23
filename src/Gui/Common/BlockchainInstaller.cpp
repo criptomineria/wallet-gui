@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -49,7 +49,7 @@ const quint32 BYTECOIN_BLOCK_SIZE = 0xd5;
 }
 
 BlockchainInstaller::BlockchainInstaller(QObject* _parent) : QObject(_parent), m_blockIndexesFileName("blockindexes.dat"), m_blocksFileName("blocks.dat"),
-  m_alloyDir(Settings::instance().getDataDir().absolutePath()), m_applicationDir(QDir::current()) {
+  m_auruxcoinDir(Settings::instance().getDataDir().absolutePath()), m_applicationDir(QDir::current()) {
 }
 
 BlockchainInstaller::~BlockchainInstaller() {
@@ -60,20 +60,20 @@ void BlockchainInstaller::exec() {
     return;
   }
 
-  if (!checkIfAlloyBlockchainExists()) {
+  if (!checkIfauruxcoinBlockchainExists()) {
     installBlockchain();
     return;
   }
 
   quint64 currentHeight;
-  quint64 alloyHeight;
-  if (!checkIfBlockchainOutdated(currentHeight, alloyHeight)) {
+  quint64 auruxcoinHeight;
+  if (!checkIfBlockchainOutdated(currentHeight, auruxcoinHeight)) {
     return;
   }
 
   QString questionStringTemplate = tr("Would you like to replace your current blockchain (height: %1)\nwith the one in your GUI wallet folder (height: %2)?");
 
-  QuestionDialog dlg(tr("Blockchain installation"), QString(questionStringTemplate).arg(alloyHeight).arg(currentHeight), nullptr);
+  QuestionDialog dlg(tr("Blockchain installation"), QString(questionStringTemplate).arg(auruxcoinHeight).arg(currentHeight), nullptr);
   if (dlg.exec() == QDialog::Accepted) {
     installBlockchain();
   }
@@ -127,15 +127,15 @@ bool BlockchainInstaller::getGenesisBlockFromBlockchain(char** _genesisBlockData
   return true;
 }
 
-bool BlockchainInstaller::checkIfAlloyBlockchainExists() const {
-  return m_alloyDir.exists() && m_alloyDir.exists(m_blocksFileName);
+bool BlockchainInstaller::checkIfauruxcoinBlockchainExists() const {
+  return m_auruxcoinDir.exists() && m_auruxcoinDir.exists(m_blocksFileName);
 }
 
 bool BlockchainInstaller::checkIfBlockchainOutdated(quint64& _sourceHeight, quint64& _targetHeight) const {
   quint32 sourceHeight(0);
   quint32 targetHeight(0);
   QFile sourceBlockIndexesFile(m_applicationDir.absoluteFilePath(m_blockIndexesFileName));
-  QFile targetBlockIndexesFile(m_alloyDir.absoluteFilePath(m_blockIndexesFileName));
+  QFile targetBlockIndexesFile(m_auruxcoinDir.absoluteFilePath(m_blockIndexesFileName));
   if (!sourceBlockIndexesFile.open(QIODevice::ReadOnly) || !targetBlockIndexesFile.open(QIODevice::ReadOnly)) {
     return false;
   }
@@ -155,8 +155,8 @@ QFileInfo BlockchainInstaller::currentBlockchainInfo() const {
   return QFileInfo(m_applicationDir.absoluteFilePath(m_blocksFileName));
 }
 
-QFileInfo BlockchainInstaller::alloyBlockchainInfo() const {
-  return QFileInfo(m_alloyDir.absoluteFilePath(m_blocksFileName));
+QFileInfo BlockchainInstaller::auruxcoinBlockchainInfo() const {
+  return QFileInfo(m_auruxcoinDir.absoluteFilePath(m_blocksFileName));
 }
 
 void BlockchainInstaller::copyProgress(quint64 _copied, quint64 _total) {
@@ -165,7 +165,7 @@ void BlockchainInstaller::copyProgress(quint64 _copied, quint64 _total) {
 
 void BlockchainInstaller::installBlockchain() {
   Q_EMIT showMessageSignal(tr("Copying blockchain files..."));
-  m_alloyDir.mkpath(".");
+  m_auruxcoinDir.mkpath(".");
   QThread workerThread;
   AsyncFileProcessor fp;
   fp.moveToThread(&workerThread);
@@ -177,14 +177,14 @@ void BlockchainInstaller::installBlockchain() {
   connect(&fp, &AsyncFileProcessor::errorSignal, &waitLoop, &QEventLoop::exit);
 
   Q_EMIT copyFileSignal(m_applicationDir.absoluteFilePath(m_blockIndexesFileName),
-    m_alloyDir.absoluteFilePath(m_blockIndexesFileName));
+    m_auruxcoinDir.absoluteFilePath(m_blockIndexesFileName));
   if (waitLoop.exec() != 0) {
     workerThread.quit();
     workerThread.wait();
     return;
   }
 
-  Q_EMIT copyFileSignal(m_applicationDir.absoluteFilePath(m_blocksFileName), m_alloyDir.absoluteFilePath(m_blocksFileName));
+  Q_EMIT copyFileSignal(m_applicationDir.absoluteFilePath(m_blocksFileName), m_auruxcoinDir.absoluteFilePath(m_blocksFileName));
   if (waitLoop.exec() != 0) {
     workerThread.quit();
     workerThread.wait();

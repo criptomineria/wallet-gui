@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -28,15 +28,15 @@ public:
 private:
   const QString m_blockIndexesFileName;
   const QString m_blocksFileName;
-  const QDir m_alloyDir;
+  const QDir m_auruxcoinDir;
   const QDir m_applicationDir;
 
   bool checkIfCurrentBlockchainExists() const;
-  bool checkIfAlloyBlockchainExists() const;
+  bool checkIfauruxcoinBlockchainExists() const;
   bool getGenesisBlockFromBlockchain(char** _genesisBlockData) const;
-  bool checkIfBlockchainOutdated(quint64& _current, quint64& _alloy) const;
+  bool checkIfBlockchainOutdated(quint64& _current, quint64& _auruxcoin) const;
   QFileInfo currentBlockchainInfo() const;
-  QFileInfo alloyBlockchainInfo() const;
+  QFileInfo auruxcoinBlockchainInfo() const;
 
   void copyProgress(quint64 _copied, quint64 _total);
   void installBlockchain();

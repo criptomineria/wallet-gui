@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2017-2018, The Alloy Developers.
+ * Copyright (c) 2017-2018, The auruxcoin Developers.
  * Portions Copyright (c) 2012-2017, The CryptoNote Developers, The Bytecoin Developers.
  *
- * This file is part of Alloy.
+ * This file is part of auruxcoin.
  *
  * This file is subject to the terms and conditions defined in the
  * file 'LICENSE', which is part of this source code package.
@@ -53,8 +53,8 @@ namespace WalletGui {
 namespace {
 
 const int MAX_RECENT_WALLET_COUNT = 10;
-const char COMMUNITY_FORUM_URL[] = "http://alloyproject.org";
-const char REPORT_ISSUE_URL[] = "http://alloyproject.org";
+const char COMMUNITY_FORUM_URL[] = "https://auruxcoin.io";
+const char REPORT_ISSUE_URL[] = "https://auruxcoin.io";
 
 const char DONATION_URL_DONATION_TAG[] = "donation";
 const char DONATION_URL_LABEL_TAG[] = "label";
@@ -100,7 +100,7 @@ MainWindow::MainWindow(ICryptoNoteAdapter* _cryptoNoteAdapter, IAddressBookManag
   m_addRecipientAction(new QAction(this)), m_styleSheetTemplate(_styleSheetTemplate), m_walletStateMapper(new QDataWidgetMapper(this)),
   m_syncMovie(new QMovie(Settings::instance().getCurrentStyle().getWalletSyncGifFile(), QByteArray(), this)) {
   m_ui->setupUi(this);
-//  setWindowTitle(tr("Alloy Wallet %1").arg(Settings::instance().getVersion()));
+//  setWindowTitle(tr("auruxcoin Wallet %1").arg(Settings::instance().getVersion()));
   m_addRecipientAction->setObjectName("m_addRecipientAction");
   m_cryptoNoteAdapter->addObserver(this);
   m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->addObserver(this);
@@ -224,10 +224,10 @@ void MainWindow::walletOpened() {
   if (url.isValid()) {
     urlReceived(url);
   }
-  
-    setWindowTitle(tr("Alloy Wallet %1").arg(Settings::instance().getVersion()));
-    
-    
+
+    setWindowTitle(tr("auruxcoin Wallet %1").arg(Settings::instance().getVersion()));
+
+
 }
 
 void MainWindow::walletOpenError(int _initStatus) {
