@@ -32,7 +32,7 @@ const char OLD_CORE_LOG_FILE_NAME[] = "auruxcoinwallet.log";
 
 CryptoNoteAdapter::CryptoNoteAdapter(const QDir& _dataDir, bool _testnet, bool _debug, QObject* _parent) : QObject(_parent),
   m_dataDir(_dataDir), m_testnet(_testnet), m_debug(_debug), m_connectionMethod(ConnectionMethod::AUTO),
-  m_localDaemodPort(RPC_DEFAULT_PORT), m_remoteDaemonUrl(), m_coreLogger(), m_walletLogger(),
+  m_localDaemodPort(2320), m_remoteDaemonUrl(), m_coreLogger(), m_walletLogger(),
   m_currency(CryptoNote::CurrencyBuilder(m_coreLogger).currency()),
   m_nodeAdapter(nullptr), m_autoConnectionTimerId(-1) {
 }
@@ -371,7 +371,7 @@ void CryptoNoteAdapter::initRemoteRpcNode() {
 }
 
 void CryptoNoteAdapter::onLocalDaemonNotFound() {
-  WalletLogger::debug(tr("[CryptoNote wrapper] Daemon on 127.0.0.1:%1 not found").arg(RPC_DEFAULT_PORT));
+  WalletLogger::debug(tr("[CryptoNote wrapper] Daemon on 127.0.0.1:%1 not found").arg(2320));
   killTimer(m_autoConnectionTimerId);
   m_autoConnectionTimerId = -1;
   QObject* nodeAdapter = dynamic_cast<QObject*>(m_nodeAdapter);
